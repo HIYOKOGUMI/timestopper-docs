@@ -1,0 +1,333 @@
+:root {
+  --bg: #fffaf0;
+  --bg-card: #ffffff;
+  --ink: #2b2118;
+  --ink-soft: #6b5d4d;
+  --line: #efe4d0;
+  --accent: #ff8f00;
+  --accent-soft: #ffd54f;
+  --accent-bg: #fff5db;
+  --sidebar-bg: #2b2118;
+  --sidebar-ink: #f3ead9;
+  --sidebar-soft: #b9a88f;
+  --maxw: 860px;
+  --sidebar-w: 300px;
+  font-size: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
+    "Yu Gothic", "Meiryo", system-ui, -apple-system, sans-serif;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- サイドバー ---------- */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--sidebar-bg);
+  color: var(--sidebar-ink);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0 16px;
+  overflow-y: auto;
+  z-index: 30;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px 22px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 14px;
+}
+.brand-logo { font-size: 34px; line-height: 1; }
+.brand-title { font-size: 21px; font-weight: 800; letter-spacing: .02em; }
+.brand-sub { font-size: 12px; color: var(--sidebar-soft); margin-top: 3px; }
+
+#nav { flex: 1; padding: 0 14px; }
+
+.nav-section {
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--sidebar-soft);
+  text-transform: uppercase;
+  padding: 16px 12px 8px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--sidebar-ink);
+  font-size: 14.5px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.nav-link:hover { background: rgba(255,255,255,.06); text-decoration: none; }
+.nav-link.active {
+  background: var(--accent);
+  color: #2b2118;
+  font-weight: 700;
+}
+.nav-link .ico { font-size: 16px; line-height: 1.4; flex-shrink: 0; }
+.nav-link .num {
+  font-size: 11px;
+  opacity: .6;
+  display: block;
+}
+
+.sidebar-foot {
+  padding: 16px 24px 4px;
+  font-size: 12.5px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.sidebar-foot a { color: var(--sidebar-soft); }
+
+/* ---------- メイン ---------- */
+#main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  padding: 56px 48px 120px;
+}
+#content { max-width: var(--maxw); margin: 0 auto; }
+
+/* ドキュメントヘッダーバナー */
+.doc-banner {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-soft);
+  border-left: 5px solid var(--accent);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 40px;
+}
+.doc-banner .kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--accent);
+}
+.doc-banner .dt { font-size: 22px; font-weight: 800; margin: 4px 0 0; }
+.doc-banner .dd { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+
+/* ドキュメント終端 */
+.doc-end {
+  margin: 56px 0 0;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+}
+.doc-end .rule {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px;
+}
+.doc-end .rule::before, .doc-end .rule::after {
+  content: ""; flex: 1; height: 1px; background: var(--line);
+}
+.doc-end .badge {
+  display: inline-block;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.doc-end .next {
+  margin-top: 22px;
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.doc-end .next:hover { text-decoration: none; opacity: .9; }
+
+/* ---------- Markdown 本文 ---------- */
+.md h1, .md h2, .md h3 { line-height: 1.4; font-weight: 800; }
+.md > h1:first-child { display: none; } /* バナーで表示するので隠す */
+.md h1 { font-size: 28px; margin: 48px 0 16px; }
+.md h2 {
+  font-size: 22px;
+  margin: 44px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-soft);
+}
+.md h3 { font-size: 18px; margin: 32px 0 10px; color: #4a3c2c; }
+.md p { margin: 14px 0; }
+.md ul, .md ol { margin: 14px 0; padding-left: 26px; }
+.md li { margin: 6px 0; }
+.md strong { color: #1f150c; font-weight: 700; }
+.md code {
+  background: #f3ece0;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: .9em;
+  font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
+}
+.md pre {
+  background: #2b2118;
+  color: #f3ead9;
+  padding: 18px 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+.md pre code { background: none; padding: 0; color: inherit; }
+.md blockquote {
+  margin: 18px 0;
+  padding: 12px 20px;
+  background: var(--accent-bg);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  color: #4a3c2c;
+}
+.md blockquote p { margin: 6px 0; }
+.md hr { border: none; border-top: 1px solid var(--line); margin: 34px 0; }
+.md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+  display: block;
+  overflow-x: auto;
+}
+.md th, .md td {
+  border: 1px solid var(--line);
+  padding: 10px 13px;
+  text-align: left;
+  vertical-align: top;
+}
+.md th { background: var(--accent-bg); font-weight: 700; }
+.md tr:nth-child(even) td { background: #fdf8ee; }
+
+/* ---------- ホーム ---------- */
+.hero {
+  text-align: center;
+  padding: 28px 0 12px;
+}
+.hero .emoji { font-size: 64px; }
+.hero h1 {
+  font-size: 38px;
+  font-weight: 900;
+  margin: 12px 0 6px;
+  letter-spacing: .01em;
+}
+.hero .tag {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.hero .pills { margin-top: 20px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.pill {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-soft);
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 5px 13px;
+  border-radius: 999px;
+}
+
+.lead {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin: 38px 0;
+  font-size: 15.5px;
+}
+.lead p { margin: 10px 0; }
+
+.home-h {
+  font-size: 14px;
+  letter-spacing: .1em;
+  color: var(--ink-soft);
+  font-weight: 700;
+  margin: 46px 0 4px;
+  text-transform: uppercase;
+}
+.cards { display: grid; gap: 16px; margin-top: 18px; }
+.card {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 24px;
+  cursor: pointer;
+  transition: transform .14s, box-shadow .14s, border-color .14s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(120,90,30,.12);
+  border-color: var(--accent-soft);
+  text-decoration: none;
+}
+.card .card-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .05em;
+}
+.card .card-title { font-size: 19px; font-weight: 800; margin: 6px 0 6px; color: var(--ink); }
+.card .card-desc { font-size: 14px; color: var(--ink-soft); margin: 0; }
+.card .card-go { font-size: 13px; color: var(--accent); font-weight: 700; margin-top: 12px; }
+
+.home-foot {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+/* ---------- メニュー・レスポンシブ ---------- */
+#menuToggle {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 40;
+  background: var(--sidebar-bg);
+  color: #fff;
+  border: none;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+#overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 25;
+}
+
+@media (max-width: 860px) {
+  #menuToggle { display: block; }
+  #sidebar { transform: translateX(-100%); transition: transform .25s; }
+  body.nav-open #sidebar { transform: translateX(0); }
+  body.nav-open #overlay { display: block; }
+  #main { margin-left: 0; padding: 76px 20px 100px; }
+  .hero h1 { font-size: 30px; }
+}
